@@ -48,6 +48,10 @@ script:
           data_template:
             entity_id: $media_player_control
             volume_level: !lambda return (id(new_music_position).state / 100);
+  - id: music_before_script
+    mode: restart
+    then:
+     - logger.log: "Running pre-source script"
 
 number:
   - platform: template
@@ -120,7 +124,7 @@ binary_sensor:
                   entity_id: $media_player_control
 
   - platform: touchscreen
-    name: "$room MPR Touch"
+    name: "$room $source_1 Touch"
     x_min: 105 # Center x - radius
     x_max: 135 # Center x + radius
     y_min: 55 # Center y - radius
@@ -131,10 +135,7 @@ binary_sensor:
           condition:
             lambda: 'return id(media_player_state).state == "paused";'
           then:
-            - homeassistant.service:
-                service: media_player.unjoin
-                data_template:
-                  entity_id: $media_player_control
+            - script.execute: music_before_script
             - homeassistant.service:
                 service: media_player.select_source
                 data_template:
@@ -142,7 +143,7 @@ binary_sensor:
                   source: $source_1
 
   - platform: touchscreen
-    name: "$room Current Touch"
+    name: "$room $source_2 Touch"
     x_min: 105 # Center x - radius
     x_max: 135 # Center x + radius
     y_min: 155 # Center y - radius
@@ -153,10 +154,7 @@ binary_sensor:
           condition:
             lambda: 'return id(media_player_state).state == "paused";'
           then:
-            - homeassistant.service:
-                service: media_player.unjoin
-                data_template:
-                  entity_id: $media_player_control
+            - script.execute: music_before_script
             - homeassistant.service:
                 service: media_player.select_source
                 data_template:
@@ -164,7 +162,7 @@ binary_sensor:
                   source: $source_2
 
   - platform: touchscreen
-    name: "$room Wake Up Touch"
+    name: "$room $source_3 Touch"
     x_min: 55 # Center x - radius
     x_max: 85 # Center x + radius
     y_min: 105 # Center y - radius
@@ -175,10 +173,7 @@ binary_sensor:
           condition:
             lambda: 'return id(media_player_state).state == "paused";'
           then:
-            - homeassistant.service:
-                service: media_player.unjoin
-                data_template:
-                  entity_id: $media_player_control
+            - script.execute: music_before_script
             - homeassistant.service:
                 service: media_player.select_source
                 data_template:

@@ -64,6 +64,14 @@ binary_sensor: # Control how the bezel button works
             - display.page.show: $secondary_page
           else:
             - display.page.show: $default_page
+
+script:
+  - id: !extend music_before_script
+    then:
+      - homeassistant.service:
+          service: media_player.unjoin
+          data_template:
+            entity_id: $media_player_control
 ```
 
 You'll also need the following template sensor for the weather page:
