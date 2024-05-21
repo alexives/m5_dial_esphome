@@ -1,0 +1,51 @@
+id: WeatherPage2
+lambda: |-
+  it.filled_circle(120, 120, 120, Color(0,0,0));
+
+  if(id(weather_state).state == "cloudy") {
+    it.image(120, 100, weather_cloudy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "fog") {
+    it.image(120, 100, weather_fog, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "clear-night") {
+    it.image(120, 100, weather_clear_night, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "hail") {
+    it.image(120, 100, weather_hail, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "lightning") {
+    it.image(120, 100, weather_lightning, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "lightning-rainy") {
+    it.image(120, 100, weather_lightning_rainy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "partlycloudy") {
+    it.image(120, 100, weather_partlycloudy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "pouring") {
+    it.image(120, 100, weather_pouring, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "rainy") {
+    it.image(120, 100, weather_rainy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "snowy") {
+    it.image(120, 100, weather_snowy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "snowy-rainy") {
+    it.image(120, 100, weather_snowy_rainy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "sunny") {
+    it.image(120, 100, weather_sunny, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "windy") {
+    it.image(120, 100, weather_windy, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "windy-variant") {
+    it.image(120, 100, weather_windy_variant, ImageAlign::CENTER);
+  }
+  else if (id(weather_state).state == "exceptional") {
+    it.image(120, 100, weather_exceptional, ImageAlign::CENTER);
+  }
+
+  it.printf(120, 200, id(roboto36), TextAlign::CENTER, "%0.f°F", id(weather_temperature).state);

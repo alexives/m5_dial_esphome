@@ -1,0 +1,12 @@
+id: LockPage
+lambda: |-
+  if (id(lock_state).state != "locked")
+  {
+    it.filled_circle(120, 120, 120, Color(0,0,0));
+    it.image(120, 120, lock_locked, ImageAlign::CENTER);
+  }
+  else
+  {
+    it.filled_circle(120, 120, 120, mid_red_color);
+    it.image(120, 120, lock_unlocked, ImageAlign::CENTER);
+  }

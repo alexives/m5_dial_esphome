@@ -1,0 +1,16 @@
+image:
+  - id: lock_unlocked
+    file: mdi:lock-open-variant
+    resize: 100x100
+  - id: lock_locked
+    file: mdi:lock
+    resize: 100x100
+
+text_sensor:
+  - platform: homeassistant
+    name: "Lock State"
+    id: "lock_state"
+    entity_id: $lock_entity
+    internal: true
+    on_value:
+      - component.update: my_lcd

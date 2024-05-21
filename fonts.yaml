@@ -1,0 +1,16 @@
+font:
+  - id: roboto16
+    file: "gfonts://Roboto"
+    size: 16
+
+  - id: roboto20
+    file: "gfonts://Roboto"
+    size: 20
+
+  - id: roboto24
+    file: "gfonts://Roboto"
+    size: 24
+
+  - id: roboto36
+    file: "gfonts://Roboto"
+    size: 36

@@ -1,0 +1,5 @@
+id: ScalePage
+lambda: |-
+  it.filled_circle(120, 120, 120, Color(0,0,0));
+
+  it.printf(120, 120, id(roboto36), TextAlign::CENTER, "%.1f lbs", id(scale_current_weight).state);

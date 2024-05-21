@@ -1,0 +1,433 @@
+binary_sensor:
+  - platform: touchscreen
+    name: "$room Weather Touch"
+    x_min: 20 # Center x - radius
+    x_max: 220 # Center x + radius
+    y_min: 20 # Center y - radius
+    y_max: 220 # Center y + radius
+    page_id: WeatherPage
+    on_press:
+      # If weather page isn't default, tap to show default, otherwise show secondary.
+      - if:
+          condition:
+            display.is_displaying_page: $default_page
+          then:
+            - display.page.show: $secondary_page
+          else:
+            - display.page.show: $default_page
+
+images:
+  - id: weather_umbrella
+    file: mdi:umbrella
+    resize: 40x40
+  - id: weather_clear_night
+    file: mdi:weather-night
+    resize: 110x110
+  - id: weather_cloudy
+    file: mdi:weather-cloudy
+    resize: 110x110
+  - id: weather_fog
+    file: mdi:weather-fog
+    resize: 110x110
+  - id: weather_hail
+    file: mdi:weather-hail
+    resize: 110x110
+  - id: weather_lightning
+    file: mdi:weather-lightning
+    resize: 110x110
+  - id: weather_lightning_rainy
+    file: mdi:weather-lightning-rainy
+    resize: 110x110
+  - id: weather_partlycloudy
+    file: mdi:weather-partly-cloudy
+    resize: 110x110
+  - id: weather_pouring
+    file: mdi:weather-pouring
+    resize: 110x110
+  - id: weather_rainy
+    file: mdi:weather-rainy
+    resize: 110x110
+  - id: weather_snowy
+    file: mdi:weather-snowy
+    resize: 110x110
+  - id: weather_snowy_rainy
+    file: mdi:weather-snowy-rainy
+    resize: 110x110
+  - id: weather_sunny
+    file: mdi:weather-sunny
+    resize: 110x110
+  - id: weather_windy
+    file: mdi:weather-windy
+    resize: 110x110
+  - id: weather_windy_variant
+    file: mdi:weather-windy-variant
+    resize: 110x110
+  - id: weather_exceptional
+    file: mdi:alert
+    resize: 81x801
+
+sensor:
+  - platform: homeassistant
+    name: "weather_temperature"
+    id: "weather_temperature"
+    entity_id: weather.pirateweather
+    attribute: temperature
+    internal: true
+    on_value:
+      - component.update: my_lcd
+
+  - platform: homeassistant
+    name: "Forecast Temp"
+    id: "forecast_temperature"
+    entity_id: sensor.weather_forecast_daily
+    internal: true
+    attribute: temperature
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    name: "Forecast Temp Low"
+    id: "forecast_temperature_low"
+    attribute: templow
+    entity_id: sensor.weather_forecast_daily
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip"
+    name: "forecast_precip"
+    entity_id: sensor.weather_forecast_daily
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_0"
+    name: "forecast_temp_0"
+    entity_id: sensor.forecast_0
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_0"
+    name: "forecast_precip_0"
+    entity_id: sensor.forecast_0
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_1"
+    name: "forecast_temp_1"
+    entity_id: sensor.forecast_1
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_1"
+    name: "forecast_precip_1"
+    entity_id: sensor.forecast_1
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_2"
+    name: "forecast_temp_2"
+    entity_id: sensor.forecast_2
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_2"
+    name: "forecast_precip_2"
+    entity_id: sensor.forecast_2
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_3"
+    name: "forecast_temp_3"
+    entity_id: sensor.forecast_3
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_3"
+    name: "forecast_precip_3"
+    entity_id: sensor.forecast_3
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_4"
+    name: "forecast_temp_4"
+    entity_id: sensor.forecast_4
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_4"
+    name: "forecast_precip_4"
+    entity_id: sensor.forecast_4
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_5"
+    name: "forecast_temp_5"
+    entity_id: sensor.forecast_5
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_5"
+    name: "forecast_precip_5"
+    entity_id: sensor.forecast_5
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_6"
+    name: "forecast_temp_6"
+    entity_id: sensor.forecast_6
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_6"
+    name: "forecast_precip_6"
+    entity_id: sensor.forecast_6
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_7"
+    name: "forecast_temp_7"
+    entity_id: sensor.forecast_7
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_7"
+    name: "forecast_precip_7"
+    entity_id: sensor.forecast_7
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_8"
+    name: "forecast_temp_8"
+    entity_id: sensor.forecast_8
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_8"
+    name: "forecast_precip_8"
+    entity_id: sensor.forecast_8
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_9"
+    name: "forecast_temp_9"
+    entity_id: sensor.forecast_9
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_9"
+    name: "forecast_precip_9"
+    entity_id: sensor.forecast_9
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_10"
+    name: "forecast_temp_10"
+    entity_id: sensor.forecast_10
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_10"
+    name: "forecast_precip_10"
+    entity_id: sensor.forecast_10
+    internal: true
+    attribute: precipitation_probability
+
+  - platform: homeassistant
+    id: "forecast_temp_11"
+    name: "forecast_temp_11"
+    entity_id: sensor.forecast_11
+    internal: true
+    on_value:
+      - component.update: my_lcd
+  - platform: homeassistant
+    id: "forecast_precip_11"
+    name: "forecast_precip_11"
+    entity_id: sensor.forecast_11
+    internal: true
+    attribute: precipitation_probability
+
+text_sensor:
+  - platform: homeassistant
+    name: "weather_state"
+    id: "weather_state"
+    entity_id: $weather_entity
+    internal: true
+    on_value:
+      - component.update: my_lcd
+
+  - platform: homeassistant
+    id: "forecast_condition_0"
+    name: "forecast_condition_0"
+    entity_id: sensor.forecast_0
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_0"
+    name: "forecast_datetime_0"
+    entity_id: sensor.forecast_0
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_1"
+    name: "forecast_condition_1"
+    entity_id: sensor.forecast_1
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_1"
+    name: "forecast_datetime_1"
+    entity_id: sensor.forecast_1
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_2"
+    name: "forecast_condition_2"
+    entity_id: sensor.forecast_2
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_2"
+    name: "forecast_datetime_2"
+    entity_id: sensor.forecast_2
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_3"
+    name: "forecast_condition_3"
+    entity_id: sensor.forecast_3
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_3"
+    name: "forecast_datetime_3"
+    entity_id: sensor.forecast_3
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_4"
+    name: "forecast_condition_4"
+    entity_id: sensor.forecast_4
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_4"
+    name: "forecast_datetime_4"
+    entity_id: sensor.forecast_4
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_5"
+    name: "forecast_condition_5"
+    entity_id: sensor.forecast_5
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_5"
+    name: "forecast_datetime_5"
+    entity_id: sensor.forecast_5
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_6"
+    name: "forecast_condition_6"
+    entity_id: sensor.forecast_6
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_6"
+    name: "forecast_datetime_6"
+    entity_id: sensor.forecast_6
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_7"
+    name: "forecast_condition_7"
+    entity_id: sensor.forecast_7
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_7"
+    name: "forecast_datetime_7"
+    entity_id: sensor.forecast_7
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_8"
+    name: "forecast_condition_8"
+    entity_id: sensor.forecast_8
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_8"
+    name: "forecast_datetime_8"
+    entity_id: sensor.forecast_8
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_9"
+    name: "forecast_condition_9"
+    entity_id: sensor.forecast_9
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_9"
+    name: "forecast_datetime_9"
+    entity_id: sensor.forecast_9
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_10"
+    name: "forecast_condition_10"
+    entity_id: sensor.forecast_10
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_10"
+    name: "forecast_datetime_10"
+    entity_id: sensor.forecast_10
+    internal: true
+    attribute: datetime
+
+  - platform: homeassistant
+    id: "forecast_condition_11"
+    name: "forecast_condition_11"
+    entity_id: sensor.forecast_11
+    internal: true
+    attribute: condition
+  - platform: homeassistant
+    id: "forecast_datetime_11"
+    name: "forecast_datetime_11"
+    entity_id: sensor.forecast_11
+    internal: true
+    attribute: datetime

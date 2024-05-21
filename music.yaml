@@ -1,0 +1,260 @@
+image:
+  - id: volume_mute
+    file: mdi:volume-variant-off
+    resize: 40x40
+  - id: volume_notmute
+    file: mdi:volume-low
+    resize: 40x40
+  - id: media_play
+    file: mdi:play
+    resize: 80x80
+  - id: media_pause
+    file: mdi:pause
+    resize: 100x100
+  - id: media_skip_next
+    file: mdi:skip-next
+    resize: 40x40
+  - id: media_skip_previous
+    file: mdi:skip-previous
+    resize: 40x40
+  - id: mpr
+    file: mdi:newspaper
+    resize: 30x30
+  - id: current
+    file: mdi:guitar-electric
+    resize: 30x30
+  - id: shut_up
+    file: mdi:glass-mug-variant
+    resize: 30x30
+  - id: group
+    file: mdi:play
+    resize: 30x30
+
+script:
+  - id: my_music_script
+    mode: restart
+    then:
+      - delay: $script_delay
+      - logger.log:
+          format: "Setting Volume to %.1f"
+          args: ["id(new_music_position).state / 100"]
+      - homeassistant.service:
+          service: media_player.volume_set
+          data_template:
+            entity_id: $media_player_control
+            volume_level: !lambda return (id(new_music_position).state / 100);
+
+number:
+  - platform: template
+    id: music_bottom_gauge_angle
+    internal: true
+    optimistic: true
+    min_value: 30
+    max_value: 180
+    step: 1
+    initial_value: 70
+
+  - platform: template
+    id: new_music_position
+    initial_value: 0
+    min_value: 0
+    max_value: 60
+    step: 1
+    optimistic: True
+
+binary_sensor:
+  - platform: touchscreen
+    name: "$room Pause Touch"
+    x_min: 70 # Center x - radius
+    x_max: 170 # Center x + radius
+    y_min: 70 # Center y - radius
+    y_max: 170 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "playing";'
+          then:
+            - homeassistant.service:
+                service: media_player.media_pause
+                data_template:
+                  entity_id: $media_player_control
+
+  - platform: touchscreen
+    name: "$room Next Track Touch"
+    x_min: 170 # Center x - radius
+    x_max: 210 # Center x + radius
+    y_min: 80 # Center y - radius
+    y_max: 120 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "playing";'
+          then:
+            - homeassistant.service:
+                service: media_player.media_next_track
+                data_template:
+                  entity_id: $media_player_control
+
+  - platform: touchscreen
+    name: "$room Previous Track Touch"
+    x_min: 30 # Center x - radius
+    x_max: 70 # Center x + radius
+    y_min: 80 # Center y - radius
+    y_max: 120 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "playing";'
+          then:
+            - homeassistant.service:
+                service: media_player.media_previous_track
+                data_template:
+                  entity_id: $media_player_control
+
+  - platform: touchscreen
+    name: "$room MPR Touch"
+    x_min: 105 # Center x - radius
+    x_max: 135 # Center x + radius
+    y_min: 55 # Center y - radius
+    y_max: 85 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "paused";'
+          then:
+            - homeassistant.service:
+                service: media_player.unjoin
+                data_template:
+                  entity_id: $media_player_control
+            - homeassistant.service:
+                service: media_player.select_source
+                data_template:
+                  entity_id: $media_player_control
+                  source: MPR News
+
+  - platform: touchscreen
+    name: "$room Current Touch"
+    x_min: 105 # Center x - radius
+    x_max: 135 # Center x + radius
+    y_min: 155 # Center y - radius
+    y_max: 185 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "paused";'
+          then:
+            - homeassistant.service:
+                service: media_player.unjoin
+                data_template:
+                  entity_id: $media_player_control
+            - homeassistant.service:
+                service: media_player.select_source
+                data_template:
+                  entity_id: $media_player_control
+                  source: The Current
+
+  - platform: touchscreen
+    name: "$room Wake Up Touch"
+    x_min: 55 # Center x - radius
+    x_max: 85 # Center x + radius
+    y_min: 105 # Center y - radius
+    y_max: 135 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "paused";'
+          then:
+            - homeassistant.service:
+                service: media_player.unjoin
+                data_template:
+                  entity_id: $media_player_control
+            - homeassistant.service:
+                service: media_player.select_source
+                data_template:
+                  entity_id: $media_player_control
+                  source: "Shut up, it's fun 🍺"
+
+  - platform: touchscreen
+    name: "$room Play Touch"
+    x_min: 155 # Center x - radius
+    x_max: 185 # Center x + radius
+    y_min: 105 # Center y - radius
+    y_max: 135 # Center y + radius
+    page_id: MusicPage
+    on_press:
+      - if:
+          condition:
+            lambda: 'return id(media_player_state).state == "paused";'
+          then:
+            - homeassistant.service:
+                service: media_player.media_play
+                data_template:
+                  entity_id: $media_player_control
+
+sensor:
+  - platform: rotary_encoder
+    name: "$room Rotary Encoder"
+    id: rotaryencoder
+    resolution: 1
+    pin_a:
+      number: GPIO40
+      mode:
+        input: true
+        pullup: true
+    pin_b:
+      number: GPIO41
+      mode:
+        input: true
+        pullup: true
+    accuracy_decimals: 1
+    on_clockwise:
+      - display.page.show: MusicPage
+      - lambda: |-
+          int newvalue = id(new_music_position).state;
+          if (newvalue > 54) {
+            id(new_music_position).publish_state(60); }
+          else {
+            id(new_music_position).publish_state(id(new_music_position).state + 5); }
+      - component.update: my_lcd
+      - script.execute: my_music_script
+
+    on_anticlockwise:
+      - display.page.show: MusicPage
+      - lambda: |-
+          int newvalue = id(new_music_position).state;
+          if (newvalue < 6) {
+            id(new_music_position).publish_state(0); }
+          else {
+            id(new_music_position).publish_state(id(new_music_position).state - 5); }
+      - component.update: my_lcd
+      - script.execute: my_music_script
+
+  - platform: homeassistant
+    id: music_current_position
+    entity_id: $media_player_control
+    attribute: volume_level
+    filters:
+      - multiply: 100
+    on_value:
+      if:
+        condition:
+          not:
+            - script.is_running: my_music_script
+        then:
+          - lambda: "id(new_music_position).publish_state(x);"
+          - component.update: my_lcd
+
+text_sensor:
+  - platform: homeassistant
+    name: "Media Player State"
+    id: "media_player_state"
+    entity_id: $media_player_control
+    internal: true
+    on_value:
+      - component.update: my_lcd
