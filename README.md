@@ -17,6 +17,7 @@ substitutions:
   media_player_control: media_player.bathroom # This is the media player controlled by MusicPage
   scale_entity: sensor.mi_body_composition_scale_61dc_mass # This is the scale used by ScalePage
   script_delay: 1s # This is the delay after adjusting the rotary before it sends the updated volumef
+  # Media player input selectors/icons
   source_1: MPR News
   source_1_image: mdi:newspaper
   source_2: The Current
