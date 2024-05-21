@@ -115,6 +115,7 @@ number:
 binary_sensor:
   - platform: gpio
     pin: GPIO42
+    id: bezel_button
     name: "$room Bezel Button"
     on_press:
       - if:
