@@ -5,16 +5,16 @@ lambda: |-
   if (id(media_player_state).state != "playing")
   {
     it.filled_circle(120, 70, 30, light_grey_color);
-    it.image(120, 70, mpr, ImageAlign::CENTER);
+    it.image(120, 70, source_1_image, ImageAlign::CENTER);
 
     it.filled_circle(120, 170, 30, light_grey_color);
-    it.image(120, 170, current, ImageAlign::CENTER);
+    it.image(120, 170, source_2_image, ImageAlign::CENTER);
 
     it.filled_circle(70, 120, 30, light_grey_color);
-    it.image(70, 120, shut_up, ImageAlign::CENTER);
+    it.image(70, 120, source_3_image, ImageAlign::CENTER);
 
     it.filled_circle(170, 120, 30, light_grey_color);
-    it.image(170, 120, group, ImageAlign::CENTER);
+    it.image(170, 120, media_play_small, ImageAlign::CENTER);
   }
   else
   {

@@ -17,17 +17,17 @@ image:
   - id: media_skip_previous
     file: mdi:skip-previous
     resize: 40x40
-  - id: mpr
-    file: mdi:newspaper
-    resize: 30x30
-  - id: current
-    file: mdi:guitar-electric
-    resize: 30x30
-  - id: shut_up
-    file: mdi:glass-mug-variant
-    resize: 30x30
-  - id: group
+  - id: media_play_small
     file: mdi:play
+    resize: 30x30
+  - id: source_1_image
+    file: $source_1_image
+    resize: 30x30
+  - id: source_2_image
+    file: $source_2_image
+    resize: 30x30
+  - id: source_3_image
+    file: $source_3_image
     resize: 30x30
 
 display:
@@ -139,7 +139,7 @@ binary_sensor:
                 service: media_player.select_source
                 data_template:
                   entity_id: $media_player_control
-                  source: MPR News
+                  source: $source_1
 
   - platform: touchscreen
     name: "$room Current Touch"
@@ -161,7 +161,7 @@ binary_sensor:
                 service: media_player.select_source
                 data_template:
                   entity_id: $media_player_control
-                  source: The Current
+                  source: $source_2
 
   - platform: touchscreen
     name: "$room Wake Up Touch"
@@ -183,7 +183,7 @@ binary_sensor:
                 service: media_player.select_source
                 data_template:
                   entity_id: $media_player_control
-                  source: "Shut up, it's fun 🍺"
+                  source: $source_3
 
   - platform: touchscreen
     name: "$room Play Touch"

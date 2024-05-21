@@ -16,7 +16,13 @@ substitutions:
   secondary_page: MusicPage # This page is displayed when the backlight button is pressed
   media_player_control: media_player.bathroom # This is the media player controlled by MusicPage
   scale_entity: sensor.mi_body_composition_scale_61dc_mass # This is the scale used by ScalePage
-  script_delay: 1s # This is the delay after adjusting the rotary before it sends the updated volume
+  script_delay: 1s # This is the delay after adjusting the rotary before it sends the updated volumef
+  source_1: MPR News
+  source_1_image: mdi:newspaper
+  source_2: The Current
+  source_2_image: mdi:guitar-electric
+  source_3: "Shut up, it's fun 🍺"
+  source_3_image: mdi:glass-mug-variant
   weather_entity: weather.pirateweather # This is the weather entity it uses to get current temperature
   return_to_default_page: 20s # This is the delay it uses to return to the default page
   encryption_key: !secret encryption_key # Whatever you want to use for the encryption key
@@ -40,13 +46,23 @@ packages:
       - fonts.yaml
     refresh: 60sec
 
-display:
+display: # Control Page Changes
   - id: !extend dial_display
     on_page_change:
       - then:
           - delay: $return_to_default_page
           - display.page.show: $default_page
 
+binary_sensor: # Control how the bezel button works
+  - id: !extend bezel_button
+    on_press:
+      - if:
+          condition:
+            display.is_displaying_page: $default_page
+          then:
+            - display.page.show: $secondary_page
+          else:
+            - display.page.show: $default_page
 ```
 
 You'll also need the following template sensor for the weather page:
