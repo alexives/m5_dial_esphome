@@ -68,6 +68,17 @@ time:
               strftime(str, sizeof(str), "%Y-%m-%d %H:%M", localtime(&currTime));
               return  { str };
 
+display:
+  - platform: ili9xxx
+    model: gc9a01a
+    reset_pin: GPIO8
+    id: dial_display
+    cs_pin: GPIO7
+    dc_pin: GPIO4
+    dimensions: 
+      height: 240
+      width: 240
+
 rc522_i2c:
   i2c_id: bus_internal
   address: 0x28

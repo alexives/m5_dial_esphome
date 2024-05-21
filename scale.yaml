@@ -1,10 +1,15 @@
 sensor:
   - platform: homeassistant
-    entity_id: sensor.mi_body_composition_scale_61dc_mass
+    entity_id: $scale_entity
     id: scale_current_weight
     filters:
       - multiply: 2.204623
       - round: 1
     on_value:
       - display.page.show: ScalePage
-      - component.update: my_lcd
+      - component.update: dial_display
+
+display:
+  - id: !extend dial_display
+    pages:
+      - <<: !include pages/scale_page.yaml

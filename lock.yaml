@@ -13,4 +13,9 @@ text_sensor:
     entity_id: $lock_entity
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
+
+display:
+  - id: !extend dial_display
+    pages:
+      - <<: !include m5_dial/pages/lock_page.yaml

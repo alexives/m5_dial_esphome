@@ -30,6 +30,11 @@ image:
     file: mdi:play
     resize: 30x30
 
+display:
+  - id: !extend dial_display
+    pages:
+      - <<: !include pages/music_page.yaml
+
 script:
   - id: my_music_script
     mode: restart
@@ -221,7 +226,7 @@ sensor:
             id(new_music_position).publish_state(60); }
           else {
             id(new_music_position).publish_state(id(new_music_position).state + 5); }
-      - component.update: my_lcd
+      - component.update: dial_display
       - script.execute: my_music_script
 
     on_anticlockwise:
@@ -232,7 +237,7 @@ sensor:
             id(new_music_position).publish_state(0); }
           else {
             id(new_music_position).publish_state(id(new_music_position).state - 5); }
-      - component.update: my_lcd
+      - component.update: dial_display
       - script.execute: my_music_script
 
   - platform: homeassistant
@@ -248,7 +253,7 @@ sensor:
             - script.is_running: my_music_script
         then:
           - lambda: "id(new_music_position).publish_state(x);"
-          - component.update: my_lcd
+          - component.update: dial_display
 
 text_sensor:
   - platform: homeassistant
@@ -257,4 +262,4 @@ text_sensor:
     entity_id: $media_player_control
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display

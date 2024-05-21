@@ -16,7 +16,12 @@ binary_sensor:
           else:
             - display.page.show: $default_page
 
-images:
+display:
+  - id: !extend dial_display
+    pages:
+      - <<: !include pages/weather_page.yaml
+
+image:
   - id: weather_umbrella
     file: mdi:umbrella
     resize: 40x40
@@ -74,7 +79,7 @@ sensor:
     attribute: temperature
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
 
   - platform: homeassistant
     name: "Forecast Temp"
@@ -83,7 +88,7 @@ sensor:
     internal: true
     attribute: temperature
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     name: "Forecast Temp Low"
     id: "forecast_temperature_low"
@@ -91,7 +96,7 @@ sensor:
     entity_id: sensor.weather_forecast_daily
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip"
     name: "forecast_precip"
@@ -105,7 +110,7 @@ sensor:
     entity_id: sensor.forecast_0
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_0"
     name: "forecast_precip_0"
@@ -119,7 +124,7 @@ sensor:
     entity_id: sensor.forecast_1
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_1"
     name: "forecast_precip_1"
@@ -133,7 +138,7 @@ sensor:
     entity_id: sensor.forecast_2
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_2"
     name: "forecast_precip_2"
@@ -147,7 +152,7 @@ sensor:
     entity_id: sensor.forecast_3
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_3"
     name: "forecast_precip_3"
@@ -161,7 +166,7 @@ sensor:
     entity_id: sensor.forecast_4
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_4"
     name: "forecast_precip_4"
@@ -175,7 +180,7 @@ sensor:
     entity_id: sensor.forecast_5
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_5"
     name: "forecast_precip_5"
@@ -189,7 +194,7 @@ sensor:
     entity_id: sensor.forecast_6
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_6"
     name: "forecast_precip_6"
@@ -203,7 +208,7 @@ sensor:
     entity_id: sensor.forecast_7
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_7"
     name: "forecast_precip_7"
@@ -217,7 +222,7 @@ sensor:
     entity_id: sensor.forecast_8
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_8"
     name: "forecast_precip_8"
@@ -231,7 +236,7 @@ sensor:
     entity_id: sensor.forecast_9
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_9"
     name: "forecast_precip_9"
@@ -245,7 +250,7 @@ sensor:
     entity_id: sensor.forecast_10
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_10"
     name: "forecast_precip_10"
@@ -259,7 +264,7 @@ sensor:
     entity_id: sensor.forecast_11
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip_11"
     name: "forecast_precip_11"
@@ -274,7 +279,7 @@ text_sensor:
     entity_id: $weather_entity
     internal: true
     on_value:
-      - component.update: my_lcd
+      - component.update: dial_display
 
   - platform: homeassistant
     id: "forecast_condition_0"
