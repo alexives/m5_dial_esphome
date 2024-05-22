@@ -75,7 +75,7 @@ sensor:
   - platform: homeassistant
     name: "weather_temperature"
     id: "weather_temperature"
-    entity_id: weather.pirateweather
+    entity_id: $weather_entity
     attribute: temperature
     internal: true
     on_value:
@@ -84,7 +84,7 @@ sensor:
   - platform: homeassistant
     name: "Forecast Temp"
     id: "forecast_temperature"
-    entity_id: sensor.weather_forecast_daily
+    entity_id: $forecast_entity
     internal: true
     attribute: temperature
     on_value:
@@ -93,14 +93,14 @@ sensor:
     name: "Forecast Temp Low"
     id: "forecast_temperature_low"
     attribute: templow
-    entity_id: sensor.weather_forecast_daily
+    entity_id: $forecast_entity
     internal: true
     on_value:
       - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip"
     name: "forecast_precip"
-    entity_id: sensor.weather_forecast_daily
+    entity_id: $forecast_entity
     internal: true
     attribute: precipitation_probability
 

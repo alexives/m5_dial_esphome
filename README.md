@@ -25,6 +25,7 @@ substitutions:
   source_3: "Shut up, it's fun 🍺"
   source_3_image: mdi:glass-mug-variant
   weather_entity: weather.pirateweather # This is the weather entity it uses to get current temperature
+  forecast_entity: sensor.weather_forecast_daily # This is the entity defined by the template sensor below
   return_to_default_page: 20s # This is the delay it uses to return to the default page
   encryption_key: !secret encryption_key # Whatever you want to use for the encryption key
   ota_password: !secret ota_password # OTA password to keep folks from ota'ing you
