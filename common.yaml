@@ -143,10 +143,44 @@ output:
     pin: GPIO3
     id: my_speaker_output
 
+sensor:
+  - platform: rotary_encoder
+    name: "$room Rotary Encoder"
+    id: rotaryencoder
+    resolution: 1
+    pin_a:
+      number: GPIO40
+      mode:
+        input: true
+        pullup: true
+    pin_b:
+      number: GPIO41
+      mode:
+        input: true
+        pullup: true
+    accuracy_decimals: 1
+    on_anticlockwise:
+      - if:
+          condition:
+            lambda: 'return "$page_on_rotary_turn" != "" and !strstr(phrase, "") != NULL'
+          then:
+            - display.page.show: $page_on_rotary_turn
+    on_clockwise:
+      - if:
+          condition:
+            lambda: 'return "$page_on_rotary_turn" != "";'
+          then:
+            - display.page.show: $page_on_rotary_turn
+
 text_sensor:
   - platform: template
     name: "$room RTC Sensor"
     id: rtc_template_sensor
+  - platform: template
+    id: pages_with_rotary
+    initial_value: ""
+  - platform: template
+    id: current_page
   - platform: wifi_info
     ip_address:
       name: $room ESP IP Address

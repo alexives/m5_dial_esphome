@@ -20,6 +20,12 @@ display:
   - id: !extend dial_display
     pages:
       - <<: !include pages/weather_page.yaml
+    on_page_change:
+      - to: WeatherPage
+        then:
+        - text_sensor.template.publish:
+            id: current_page
+            state: "WeatherPage"
 
 image:
   - id: weather_umbrella

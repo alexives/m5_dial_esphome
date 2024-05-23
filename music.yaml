@@ -1,3 +1,12 @@
+esphome:
+  on_boot:
+    then:
+      - text_sensor.template.publish:
+          id: pages_with_rotary
+          state: !lambda |-
+            int currentLength = strlen(id(pages_with_rotary).state);
+            return strcat(id(pages_with_rotary).state, "MusicPage");
+
 image:
   - id: volume_mute
     file: mdi:volume-variant-off
@@ -34,6 +43,12 @@ display:
   - id: !extend dial_display
     pages:
       - <<: !include pages/music_page.yaml
+    on_page_change:
+      - to: MusicPage
+        then:
+        - text_sensor.template.publish:
+            id: current_page
+            state: "MusicPage"
 
 script:
   - id: my_music_script
@@ -198,42 +213,34 @@ binary_sensor:
                   entity_id: $media_player_control
 
 sensor:
-  - platform: rotary_encoder
-    name: "$room Rotary Encoder"
-    id: rotaryencoder
-    resolution: 1
-    pin_a:
-      number: GPIO40
-      mode:
-        input: true
-        pullup: true
-    pin_b:
-      number: GPIO41
-      mode:
-        input: true
-        pullup: true
-    accuracy_decimals: 1
+  - id: !extend rotaryencoder
     on_clockwise:
-      - display.page.show: MusicPage
-      - lambda: |-
-          int newvalue = id(new_music_position).state;
-          if (newvalue > 54) {
-            id(new_music_position).publish_state(60); }
-          else {
-            id(new_music_position).publish_state(id(new_music_position).state + 5); }
-      - component.update: dial_display
-      - script.execute: my_music_script
+      - if:
+          condition:
+            display.is_displaying_page: MusicPage
+          then:
+            - lambda: |-
+                int newvalue = id(new_music_position).state;
+                if (newvalue > 54) {
+                  id(new_music_position).publish_state(60); }
+                else {
+                  id(new_music_position).publish_state(id(new_music_position).state + 5); }
+            - component.update: dial_display
+            - script.execute: my_music_script
 
     on_anticlockwise:
-      - display.page.show: MusicPage
-      - lambda: |-
-          int newvalue = id(new_music_position).state;
-          if (newvalue < 6) {
-            id(new_music_position).publish_state(0); }
-          else {
-            id(new_music_position).publish_state(id(new_music_position).state - 5); }
-      - component.update: dial_display
-      - script.execute: my_music_script
+      - if:
+          condition:
+            display.is_displaying_page: MusicPage
+          then:
+            - lambda: |-
+                int newvalue = id(new_music_position).state;
+                if (newvalue < 6) {
+                  id(new_music_position).publish_state(0); }
+                else {
+                  id(new_music_position).publish_state(id(new_music_position).state - 5); }
+            - component.update: dial_display
+            - script.execute: my_music_script
 
   - platform: homeassistant
     id: music_current_position
