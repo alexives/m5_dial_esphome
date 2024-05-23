@@ -2,7 +2,7 @@
 
 An [ESPHome](https://esphome.io/) configuration for the [M5Stack Dial](https://shop.m5stack.com/products/m5stack-dial-esp32-s3-smart-rotary-knob-w-1-28-round-touch-screen).
 
-Based on [dgaust's esphome files](https://github.com/dgaust/esphome_files)
+Based largely on [dgaust's m5 dial esphome files](https://github.com/dgaust/esphome_files) and also [this home assistant community thread](https://community.home-assistant.io/t/m5stack-dial-esp32-s3-smart-rotary-knob/623518).
 
 To use, you can use the example configuration to set up your dial with various components. For the weather config, you'll also need to set up forecast entities.
 
