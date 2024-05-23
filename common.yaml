@@ -178,7 +178,6 @@ text_sensor:
     id: rtc_template_sensor
   - platform: template
     id: pages_with_rotary
-    initial_value: ""
   - platform: template
     id: current_page
   - platform: wifi_info
