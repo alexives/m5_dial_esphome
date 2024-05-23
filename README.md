@@ -24,7 +24,7 @@ substitutions:
   default_page: WeatherPage # This is the page it defaults to
   secondary_page: MusicPage # This page is displayed when the backlight button is pressed
   # Optional common substitutions
-  page_on_rotary_turn: MusicPage # This page is displayed when the rotary is turned
+  page_on_rotary_turn: MusicPage # This page is displayed when the rotary is turned and not on another rotary page
   # Media player input selectors/icons
   media_player_control: media_player.bathroom # This is the media player controlled by MusicPage
   script_delay: 1s # This is the delay after adjusting the rotary before it sends the updated volumef
