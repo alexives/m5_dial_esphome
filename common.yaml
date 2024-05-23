@@ -162,7 +162,7 @@ sensor:
     on_anticlockwise:
       - if:
           condition:
-            lambda: 'return "$page_on_rotary_turn" != "" and !strstr(phrase, "") != NULL'
+            lambda: 'return "$page_on_rotary_turn" != "" and !strstr(id(pages_with_rotary).state, id(current_page).state) != NULL'
           then:
             - display.page.show: $page_on_rotary_turn
     on_clockwise:
