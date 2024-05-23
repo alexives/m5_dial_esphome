@@ -3,9 +3,7 @@ esphome:
     then:
       - text_sensor.template.publish:
           id: pages_with_rotary
-          state: !lambda |-
-            int currentLength = strlen(id(pages_with_rotary).state);
-            return strcat(id(pages_with_rotary).state, "MusicPage");
+          state: !lambda 'return id(pages_with_rotary).state.append("MusicPage");'
 
 image:
   - id: volume_mute

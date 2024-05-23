@@ -162,7 +162,7 @@ sensor:
     on_anticlockwise:
       - if:
           condition:
-            lambda: 'return "$page_on_rotary_turn" != "" and id(pages_with_rotary).state.find(id(current_page).state) == std::string::npos'
+            lambda: 'return "$page_on_rotary_turn" != "" && id(pages_with_rotary).state.find(id(current_page).state) == std::string::npos;'
           then:
             - display.page.show: $page_on_rotary_turn
     on_clockwise:
