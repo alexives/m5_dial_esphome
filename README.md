@@ -50,7 +50,7 @@ packages:
       - common.yaml
       - colors.yaml
       - fonts.yaml
-    refresh: 60sec
+    refresh: 1h
 
 display: # Control Page Changes
   - id: !extend dial_display

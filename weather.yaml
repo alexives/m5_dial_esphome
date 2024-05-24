@@ -85,7 +85,11 @@ sensor:
     attribute: temperature
     internal: true
     on_value:
-      - component.update: dial_display
+      - if:
+          condition:
+            display.is_displaying_page: WeatherPage
+          then:
+            - component.update: dial_display
 
   - platform: homeassistant
     name: "Forecast Temp"
@@ -94,7 +98,11 @@ sensor:
     internal: true
     attribute: temperature
     on_value:
-      - component.update: dial_display
+      - if:
+          condition:
+            display.is_displaying_page: WeatherPage
+          then:
+            - component.update: dial_display
   - platform: homeassistant
     name: "Forecast Temp Low"
     id: "forecast_temperature_low"
@@ -102,7 +110,11 @@ sensor:
     entity_id: $forecast_entity
     internal: true
     on_value:
-      - component.update: dial_display
+      - if:
+          condition:
+            display.is_displaying_page: WeatherPage
+          then:
+            - component.update: dial_display
   - platform: homeassistant
     id: "forecast_precip"
     name: "forecast_precip"
@@ -117,4 +129,8 @@ text_sensor:
     entity_id: $weather_entity
     internal: true
     on_value:
-      - component.update: dial_display
+      - if:
+          condition:
+            display.is_displaying_page: WeatherPage
+          then:
+            - component.update: dial_display
