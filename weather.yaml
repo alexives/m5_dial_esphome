@@ -31,66 +31,82 @@ image:
   - id: weather_umbrella
     file: mdi:umbrella
     type: grayscale
+    transparency: alpha_channel
     resize: 40x40
   - id: weather_clear_night
     file: mdi:weather-night
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_cloudy
     file: mdi:weather-cloudy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_fog
     file: mdi:weather-fog
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_hail
     file: mdi:weather-hail
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_lightning
     file: mdi:weather-lightning
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_lightning_rainy
     file: mdi:weather-lightning-rainy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_partlycloudy
     file: mdi:weather-partly-cloudy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_pouring
     file: mdi:weather-pouring
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_rainy
     file: mdi:weather-rainy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_snowy
     file: mdi:weather-snowy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_snowy_rainy
     file: mdi:weather-snowy-rainy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_sunny
     file: mdi:weather-sunny
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_windy
     file: mdi:weather-windy
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_windy_variant
     file: mdi:weather-windy-variant
     type: grayscale
+    transparency: alpha_channel
     resize: 110x110
   - id: weather_exceptional
     file: mdi:alert
     type: grayscale
+    transparency: alpha_channel
     resize: 81x801
 
 sensor:
