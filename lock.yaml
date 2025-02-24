@@ -1,9 +1,11 @@
 image:
   - id: lock_unlocked
     file: mdi:lock-open-variant
+    type: grayscale
     resize: 100x100
   - id: lock_locked
     file: mdi:lock
+    type: grayscale
     resize: 100x100
 
 text_sensor:

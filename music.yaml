@@ -8,33 +8,43 @@ esphome:
 image:
   - id: volume_mute
     file: mdi:volume-variant-off
+    type: grayscale
     resize: 40x40
   - id: volume_notmute
     file: mdi:volume-low
+    type: grayscale
     resize: 40x40
   - id: media_play
     file: mdi:play
+    type: grayscale
     resize: 80x80
   - id: media_pause
     file: mdi:pause
+    type: grayscale
     resize: 100x100
   - id: media_skip_next
     file: mdi:skip-next
+    type: grayscale
     resize: 40x40
   - id: media_skip_previous
     file: mdi:skip-previous
+    type: grayscale
     resize: 40x40
   - id: media_play_small
     file: mdi:play
+    type: grayscale
     resize: 30x30
   - id: source_1_image
     file: $source_1_image
+    type: grayscale
     resize: 30x30
   - id: source_2_image
     file: $source_2_image
+    type: grayscale
     resize: 30x30
   - id: source_3_image
     file: $source_3_image
+    type: grayscale
     resize: 30x30
 
 display:
